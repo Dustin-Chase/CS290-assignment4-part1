@@ -1,3 +1,6 @@
 Start Time: 
 Wed Feb 4 19:29:02 2015 -0800
 End Time:
+Wed Feb 4 20:03:46 2015 -0800
+Task:
+Built blank files and directories, sketched out requirements for multiplication table in file comments
