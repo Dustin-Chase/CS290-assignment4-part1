@@ -4,3 +4,10 @@ End Time:
 Wed Feb 4 20:03:46 2015 -0800
 Task:
 Built blank files and directories, sketched out requirements for multiplication table in file comments
+
+Start Time:
+Thu Feb 5 08:04:00 2015 -0800
+End Time:
+Thu Feb 5 08:36:09 2015 -0800
+Task: 
+Sketched out requirments for loopback and login. Posted assignment clarification questions for both problems. 
