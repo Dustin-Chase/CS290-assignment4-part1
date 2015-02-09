@@ -32,20 +32,34 @@
 	* File should accept either a GET or POST for input. That GET or POST 
 	* will have an unknown number of key/value pairs. 
 	*/
-	ini_set('display_errors', 'On');
+	ini_set('display_errors', '1');
 	error_reporting(E_ALL);
 	$dataSent;
+	
+	/*Checks whether @param $var is the empty string
+	I used this function in place of the empty() function 
+	since the empty() function will return false even if the
+	$_POST/$_GET request has nothing but empty strings for
+	parameters */
+	function nonEmpty($var) {
+		foreach ($var as $value) {
+			if ($value != "")
+				return true;
+		}
+		return false;
+	}
+	
 	if($_SERVER['REQUEST_METHOD'] === 'POST') {
-		if (empty($_POST)) {
-			$dataSent = 'null'; 
+		if (!nonEmpty($_POST)) {
+			$dataSent = null; 
 		}
 		else {
 			$dataSent = $_POST;
 		}		
 	}
 	else {
-		if(empty($_GET)) {
-			$dataSent = 'null'; 
+		if(!nonEmpty($_GET)) {
+			$dataSent = null; 
 		}
 		else {
 			$dataSent = $_GET;
@@ -55,7 +69,7 @@
 	$dataToPrint = json_encode($temp);
 	/*
 	* Section 2: 
-	* Echo JSON object. ("Type": "GET or POST", "parameters":{key:value, ....}
+	* Echo JSON object like this: ("Type": "GET or POST", "parameters":{key:value, ....}
 	*/
 	print_r($dataToPrint);
 ?>

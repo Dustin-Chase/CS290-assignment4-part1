@@ -11,3 +11,10 @@ End Time:
 Thu Feb 5 08:36:09 2015 -0800
 Task: 
 Sketched out requirments for loopback and login. Posted assignment clarification questions for both problems. 
+
+Start Time: 
+Fri Feb 6 08:18:00 2015 -0800
+End Time: 
+Fri Feb 6 11:02:28 2015 -0800
+Task: 
+Coded loopback.php and tested. Worked when submitting parameters via either get or post. Ended with trying to submit empty data (no parameters). Broke the code such that now nothing is displayed ever. Need to debug. 
