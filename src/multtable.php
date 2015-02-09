@@ -1,4 +1,11 @@
-/*
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>CS-290-assignment4-Part-1</title>
+	</head>
+
+<!--
 * File Name: multtable.php
 * Author: Dustin Chase
 * Assignment Number: 4 Part 1
@@ -26,12 +33,28 @@
 * To accomplish the above task you will want to work with loops to dynamically create rows and within each row, loop to create the cells. 
 * It should output as a valid HTML5 document.
 *
-*/
+-->
 
+<?php
+ini_set('display_errors', '1');
+error_reporting(E_ALL);
+
+/*Checks whether @param $var is the empty string
+I used this function in place of the empty() function 
+since the empty() function will return false even if the
+$_POST/$_GET request has nothing but empty strings for
+parameters */
+function nonEmpty($var) {
+	foreach ($var as $value) {
+		if ($value != "")
+			return true;
+	}
+	return false;
+	}
 /*
 * SECTION 1:
 * Accept 4 parameters via the URL in a GET request
-* -Create an HTML form with a GET request
+* -Create an HTML form with a GET request 
 * parameters are called:
 *	min-multiplicand
 *	max-multiplicand
@@ -55,6 +78,49 @@
 * 
 */
 
+$noErrors = true; //sentinel. If any errors found, multiplication table
+				  //will not be built
+
+//print a message for any parameter that is missing
+if (!nonEmpty($_GET)) {
+	$noErrors = false; 
+	foreach ($_GET as $key => $value) {
+		if ($value == "")
+			echo "Missing parameter " . $key . "\n";
+	}
+}
+
+//print a message for any non-integer parameters
+foreach ($_GET as $key => $value) {
+		if (intval($value) == 0) {
+			$noErrors = false; 
+			echo $key . " must be an integer \n";
+		}
+	}
+
+//print an error message for min > max
+$minMultiplicand = intval($_GET["min-multiplicand"]);
+$maxMultiplicand = intval($_GET["max-multiplicand"]);
+$minMultiplier = intval($_GET["min-multiplier"]);
+$maxMultiplier = intval($_GET["max-multiplier"]);
+
+//if both are integers, then compare them
+if (is_int($minMultiplicand) && is_int($maxMultiplicand)) {
+	if ($minMultiplicand > $maxMultiplicand) {
+		$noErrors = false;
+		echo "Minimum multiplicand larger than maximum multiplicand.";
+	}
+}
+
+//if both are integers, then compare them
+if (is_int($minMultiplier) && is_int($maxMultiplier)) {
+	if ($minMultiplier > $maxMultiplier) {
+		$noErrors = false; 
+		echo "Minimum multiplier larger than maximum multiplier"; 
+	}
+}
+
+
 /*
 * SECTION 3:
 * Build a Table
@@ -66,3 +132,10 @@
 * build the header column
 * build the content cells
 */
+
+if ($noErrors) {
+	
+	echo "No errors found. Let's build a table!"; 
+	
+}
+?>
