@@ -135,7 +135,38 @@ if (is_int($minMultiplier) && is_int($maxMultiplier)) {
 
 if ($noErrors) {
 	
-	echo "No errors found. Let's build a table!"; 
+	echo "Multiplication Table"; 
+	//start table
+	echo "<table border=\"1\">";
+		//create blank cell at upper left
+		echo "<tr>";
+			echo "<td style=\"width:10px\">";
+			echo "      "; 
+			echo "</td>";
+		
+	//create header
+	for ($i = $minMultiplier; $i <= $maxMultiplier; $i++) {
+		echo "<td>";
+		echo $i;
+		echo "</td>";
+		
+	}
+	echo "</tr>";
+	//create multiplication table
+	for ($i = $minMultiplicand; $i <=$maxMultiplicand; $i++) {
+		echo "<tr>";
+		echo "<td>";
+		echo $i;
+		echo "</td>";
+		for($j = $minMultiplier; $j <= $maxMultiplier; $j++) {
+			echo "<td>";
+				echo $i * $j;
+			echo "</td>";
+		}
+		echo "</tr>";
+	}
+	
+	echo "</table>";
 	
 }
 ?>

@@ -25,3 +25,10 @@ End Time:
 Mon Feb 9 9:38:54 2015 -0800
 Task: 
 Debugged loopback.php. Now works for empty data.
+
+Start Time:
+Mon Feb 9 10:10:00 2015 -0800
+End Time: 
+Mon Feb 9 11:42:31 2015 -800
+Task:
+Wrote error checking for multtable.php
