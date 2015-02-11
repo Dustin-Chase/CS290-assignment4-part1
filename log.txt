@@ -32,3 +32,11 @@ End Time:
 Mon Feb 9 11:42:31 2015 -800
 Task:
 Wrote error checking for multtable.php
+
+Start Time: 
+Tue Feb 10 9:00:00 2015 -0800
+End Time:
+Tue Feb 10 10:29:03 2015 -0800
+Task: 
+Wrote dynamically generated multiplaction table for multtable.php
+

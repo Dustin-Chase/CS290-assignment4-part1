@@ -4,7 +4,7 @@
 		<meta charset="UTF-8">
 		<title>CS-290-assignment4-Part-1</title>
 	</head>
-
+		<body>
 <!--
 * File Name: multtable.php
 * Author: Dustin Chase
@@ -170,3 +170,5 @@ if ($noErrors) {
 	
 }
 ?>
+	</body>
+</html>
