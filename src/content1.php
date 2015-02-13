@@ -10,6 +10,31 @@
 
 ini_set('display_errors', '1');
 error_reporting(E_ALL);
+
+
+session_start(); 
+if(isset($_GET["logout"]) && $_GET["logout"] == 'yes') {
+	$_SESSION = array(); 
+	session_destroy();
+	$filepath = explode('/', $_SERVER['PHP_SELF'], -1);
+	$filepath = implode('/', $filepath);
+	$redirect = "http://" . $_SERVER['HTTP_HOST'] . $filepath;
+	header("Location: {$redirect}/login.php", true);
+	die(); 
+}
+
+
+/*//check if http_referer exists. If not, redirect to login
+if (!isset($_SERVER['HTTP_REFERER'])) {
+	//redirect to login page
+	header("Location: http://web.engr.oregonstate.edu/~chased/login.php");
+	
+}
+if ($_SERVER['HTTP_REFERER'] != "http://web.engr.oregonstate.edu/~chased/login.php") {
+	//redirect to login page
+	header("Location: http://web.engr.oregonstate.edu/~chased/login.php");
+}
+*/
 /*
 * Section 1:
 * login.php should have a form where a user can enter a username. 
@@ -44,14 +69,15 @@ error_reporting(E_ALL);
 * log the user out, destroying the session, and return them to the login screen.
 */
 
-session_start();
+//if not logged in, re-direct to login page
+
+//if form not filled in, display error and post link back to login page
+
 if(!isset($_POST['username']) || !nonEmpty($_POST) || empty($_POST)) {
-	echo "A username must be entered. Click "; 
-	echo "<a href=\"http://web.engr.oregonstate.edu/~chased/login.php\">";
-	echo "here"; 
-	echo "</a>";
-	echo " to return to the login screen.";
+	echo 'A username must be entered. Click <a href="http://web.engr.oregonstate.edu/~chased/login.php"> here </a> to return to the login screen.';
+	die();
 }
+
 else {
 	if (isset($_SESSION["visits"])) {
 		$_SESSION["visits"]++; 
@@ -59,12 +85,15 @@ else {
 	else {
 		$_SESSION["visits"] = 0;
 	}
-			
-
-	echo "Hello " . $_POST["username"];
-	echo " you have visited this page "; 
-	echo $_SESSION["visits"] . " times before."; 
+	if (!isset($_SESSION["logged_in"])) {
+		$_SESSION["logged_in"] = true;
+	}
 }
+
+echo 'Hello ' . $_POST["username"] . ' you have visited this page ' .  $_SESSION["visits"] . ' times before.';
+echo 'Click <a href="http://web.engr.oregonstate.edu/~chased/content1.php?logout=yes"> here </a> to logout.'; 
+echo 'Click <a href="http://web.engr.oregonstate.edu/~chased/content2.php"> here </a> to visit content2.'; 
+
 /*
 * Section 3:
 * If the user navigates away from the page and returns, the session should persist. 

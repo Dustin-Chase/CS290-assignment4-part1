@@ -38,5 +38,12 @@ Tue Feb 10 9:00:00 2015 -0800
 End Time:
 Tue Feb 10 10:29:03 2015 -0800
 Task: 
-Wrote dynamically generated multiplaction table for multtable.php
+Wrote dynamically generated multiplication table for multtable.php
+
+Start Time: 
+Tue Feb 10 15:30:00 2015 -0800
+End Time:
+Tue Feb 10 18:55:26 2015 -0800
+Task:
+Wrote login.php. Re-read info on sessions and tested out some code for sessions. Sort of worked. 
 
