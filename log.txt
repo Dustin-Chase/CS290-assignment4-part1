@@ -47,3 +47,15 @@ Tue Feb 10 18:55:26 2015 -0800
 Task:
 Wrote login.php. Re-read info on sessions and tested out some code for sessions. Sort of worked. 
 
+Start Time:
+Fri Feb 13 08:00:00 2015 -0800
+End Time:
+Fri Feb 13 12:51:21 2015 -0800
+Task: 
+Wrote and debugged content1 and content2. Still can't get the persitent login to work. 
+
+Start Time:
+Sat Feb 14 10:00:00 2015 -0800
+End Time:
+Set Feb 14 13:42:00 2015 -0800
+Debugged content1 and content2 so that persitent login works. 

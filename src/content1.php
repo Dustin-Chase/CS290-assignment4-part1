@@ -73,24 +73,27 @@ if ($_SERVER['HTTP_REFERER'] != "http://web.engr.oregonstate.edu/~chased/login.p
 
 //if form not filled in, display error and post link back to login page
 
-if(!isset($_POST['username']) || !nonEmpty($_POST) || empty($_POST)) {
-	echo 'A username must be entered. Click <a href="http://web.engr.oregonstate.edu/~chased/login.php"> here </a> to return to the login screen.';
-	die();
+if(!isset($_SESSION["logged_in"])) {
+	if (!isset($_POST['username']) || !nonEmpty($_POST)) {
+		echo 'A username must be entered. Click <a href="http://web.engr.oregonstate.edu/~chased/login.php"> here </a> to return to the login screen.';
+		die();
+	}
+	else if(empty($_POST)) {
+		header("Location: http://web.engr.oregonstate.edu/~chased/login.php");
+	}
+	else {
+		$_SESSION["visits"] = 0; 
+		$_SESSION["logged_in"] = true;
+		$_SESSION["username"] = $_POST['username']; 
+	}
 }
-
 else {
 	if (isset($_SESSION["visits"])) {
 		$_SESSION["visits"]++; 
 	}
-	else {
-		$_SESSION["visits"] = 0;
-	}
-	if (!isset($_SESSION["logged_in"])) {
-		$_SESSION["logged_in"] = true;
-	}
 }
 
-echo 'Hello ' . $_POST["username"] . ' you have visited this page ' .  $_SESSION["visits"] . ' times before.';
+echo 'Hello ' . $_SESSION["username"] . ' you have visited this page ' .  $_SESSION["visits"] . ' times before.';
 echo 'Click <a href="http://web.engr.oregonstate.edu/~chased/content1.php?logout=yes"> here </a> to logout.'; 
 echo 'Click <a href="http://web.engr.oregonstate.edu/~chased/content2.php"> here </a> to visit content2.'; 
 
