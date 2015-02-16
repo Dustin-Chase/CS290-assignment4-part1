@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>CS-290-assignment4-Part-1</title>
+		<title>Multiplication Table</title>
 	</head>
 		<body>
 <!--
@@ -34,6 +34,32 @@
 * It should output as a valid HTML5 document.
 *
 -->
+<!--
+* SECTION 1:
+* Accept 4 parameters via the URL in a GET request
+* -Create an HTML form with a GET request 
+* parameters are called:
+*	min-multiplicand
+*	max-multiplicand
+*	min-multiplier
+*	max-multiplier
+--->
+	<form action="multtable.php" method="GET">
+		min-multiplicand:<br>
+		<input type="text" name="min-multiplicand">
+		<br>
+		max-multiplicand:<br>
+		<input type="text" name="max-multiplicand">
+		<br>
+		min-multiplier:<br>
+		<input type="text" name="min-multiplier">
+		<br>
+		max-multiplier:<br>
+		<input type="text" name="max-multiplier">
+		<br>
+		<input type="submit" value="Submit">
+	</form>
+		<br>
 
 <?php
 ini_set('display_errors', '1');
@@ -51,16 +77,6 @@ function nonEmpty($var) {
 	}
 	return false;
 	}
-/*
-* SECTION 1:
-* Accept 4 parameters via the URL in a GET request
-* -Create an HTML form with a GET request 
-* parameters are called:
-*	min-multiplicand
-*	max-multiplicand
-*	min-multiplier
-*	max-multiplier
-*/
 
 /*
 * SECTION 2:
@@ -77,97 +93,98 @@ function nonEmpty($var) {
 *		-Print a message for any parameter that is missing
 * 
 */
+if(!empty($_GET)) {
+	$noErrors = true; //sentinel. If any errors found, multiplication table
+					  //will not be built
 
-$noErrors = true; //sentinel. If any errors found, multiplication table
-				  //will not be built
-
-//print a message for any parameter that is missing
-if (!nonEmpty($_GET)) {
-	$noErrors = false; 
-	foreach ($_GET as $key => $value) {
-		if ($value == "")
-			echo "Missing parameter " . $key . "\n";
-	}
-}
-
-//print a message for any non-integer parameters
-foreach ($_GET as $key => $value) {
-		if (intval($value) == 0) {
-			$noErrors = false; 
-			echo $key . " must be an integer \n";
+	//print a message for any parameter that is missing
+	if (!nonEmpty($_GET)) {
+		$noErrors = false; 
+		foreach ($_GET as $key => $value) {
+			if ($value == "")
+				echo "Missing parameter " . $key . "<br>";
 		}
 	}
 
-//print an error message for min > max
-$minMultiplicand = intval($_GET["min-multiplicand"]);
-$maxMultiplicand = intval($_GET["max-multiplicand"]);
-$minMultiplier = intval($_GET["min-multiplier"]);
-$maxMultiplier = intval($_GET["max-multiplier"]);
+	//print a message for any non-integer parameters
+	foreach ($_GET as $key => $value) {
+			if (intval($value) == 0) {
+				$noErrors = false; 
+				echo $key . " must be an integer <br>";
+			}
+		}
 
-//if both are integers, then compare them
-if (is_int($minMultiplicand) && is_int($maxMultiplicand)) {
-	if ($minMultiplicand > $maxMultiplicand) {
-		$noErrors = false;
-		echo "Minimum multiplicand larger than maximum multiplicand.";
+	//print an error message for min > max
+	$minMultiplicand = intval($_GET["min-multiplicand"]);
+	$maxMultiplicand = intval($_GET["max-multiplicand"]);
+	$minMultiplier = intval($_GET["min-multiplier"]);
+	$maxMultiplier = intval($_GET["max-multiplier"]);
+
+	//if both are integers, then compare them
+	if (is_int($minMultiplicand) && is_int($maxMultiplicand)) {
+		if ($minMultiplicand > $maxMultiplicand) {
+			$noErrors = false;
+			echo "Minimum multiplicand larger than maximum multiplicand.";
+		}
 	}
-}
 
-//if both are integers, then compare them
-if (is_int($minMultiplier) && is_int($maxMultiplier)) {
-	if ($minMultiplier > $maxMultiplier) {
-		$noErrors = false; 
-		echo "Minimum multiplier larger than maximum multiplier"; 
+	//if both are integers, then compare them
+	if (is_int($minMultiplier) && is_int($maxMultiplier)) {
+		if ($minMultiplier > $maxMultiplier) {
+			$noErrors = false; 
+			echo "Minimum multiplier larger than maximum multiplier"; 
+		}
 	}
-}
 
 
-/*
-* SECTION 3:
-* Build a Table
-* (max-multiplicand - min-multiplicand + 2) tall and 
-*(max-multiplier - min-multiplier + 2) wide. 
-* Required Steps: 
-* build the odd blank cell in the upper left
-* build the header row
-* build the header column
-* build the content cells
-*/
+	/*
+	* SECTION 3:
+	* Build a Table
+	* (max-multiplicand - min-multiplicand + 2) tall and 
+	*(max-multiplier - min-multiplier + 2) wide. 
+	* Required Steps: 
+	* build the odd blank cell in the upper left
+	* build the header row
+	* build the header column
+	* build the content cells
+	*/
 
-if ($noErrors) {
-	
-	echo "Multiplication Table"; 
-	//start table
-	echo "<table border=\"1\">";
-		//create blank cell at upper left
-		echo "<tr>";
-			echo "<td style=\"width:10px\">";
-			echo "      "; 
-			echo "</td>";
+	if ($noErrors) {
 		
-	//create header
-	for ($i = $minMultiplier; $i <= $maxMultiplier; $i++) {
-		echo "<td>";
-		echo $i;
-		echo "</td>";
-		
-	}
-	echo "</tr>";
-	//create multiplication table
-	for ($i = $minMultiplicand; $i <=$maxMultiplicand; $i++) {
-		echo "<tr>";
-		echo "<td>";
-		echo $i;
-		echo "</td>";
-		for($j = $minMultiplier; $j <= $maxMultiplier; $j++) {
+		echo "Multiplication Table"; 
+		//start table
+		echo "<table border=\"1\">";
+			//create blank cell at upper left
+			echo "<tr>";
+				echo "<td style=\"width:10px\">";
+				echo "      "; 
+				echo "</td>";
+			
+		//create header
+		for ($i = $minMultiplier; $i <= $maxMultiplier; $i++) {
 			echo "<td>";
-				echo $i * $j;
+			echo $i;
 			echo "</td>";
+			
 		}
 		echo "</tr>";
+		//create multiplication table
+		for ($i = $minMultiplicand; $i <=$maxMultiplicand; $i++) {
+			echo "<tr>";
+			echo "<td>";
+			echo $i;
+			echo "</td>";
+			for($j = $minMultiplier; $j <= $maxMultiplier; $j++) {
+				echo "<td>";
+					echo $i * $j;
+				echo "</td>";
+			}
+			echo "</tr>";
+		}
+		
+		echo "</table>";
+		
 	}
-	
-	echo "</table>";
-	
 }
 ?>
 	</body>
